@@ -1,0 +1,50 @@
+iniciar-programa
+
+define-nueva-instruccion gira-derecha como inicio
+	repetir 3 veces
+		gira-izquierda;
+	fin;
+{Avanza en línea recta hasta alguna pared}
+define-nueva-instruccion pared como inicio
+	mientras frente-libre hacer inicio
+    	avanza;
+	fin;
+fin;
+
+{ con la pared de frente se gira a la izquierda para tener la mano derecha sobre la pared. }
+define-nueva-instruccion tocar-pared como inicio
+	gira-izquierda;
+fin;
+
+define-nueva-instruccion escapar como inicio
+	mientras no-junto-a-zumbador hacer inicio
+		si derecha-libre entonces inicio
+            { Salimos de la caja y damos un paso más fuera para asegurar que
+              no seguimos pegados a la pared de la caja. }
+        	gira-derecha;
+        	avanza;   { cruza la salida }
+        	avanza;   { se aleja de la caja }
+        	apagate;
+		fin
+		sino inicio
+			si frente-libre entonces inicio
+            	avanza;
+				si frente-libre y derecha-libre y izquierda-libre entonces inicio
+                	apagate;
+				fin
+			fin
+			sino inicio 
+                gira-izquierda;
+			fin;
+		fin;
+	fin;
+fin;
+
+inicia-ejecucion
+    pared;   
+    tocar-pared;
+    escapar;
+    apagate;
+termina-ejecucion
+
+finalizar-programa
